@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:kitchen_operations/view/bottom_navigation_bar.dart';
+import 'package:kitchen_operations/view/schedule_screen.dart';
+import 'package:kitchen_operations/view/shelf_life_screen.dart';
 
-class KitchenOperationScreen extends StatefulWidget {
-  const KitchenOperationScreen({super.key});
+class LiveOrdersScreen extends StatefulWidget {
+  const LiveOrdersScreen({super.key});
 
   @override
-  State<KitchenOperationScreen> createState() =>
-      _KitchenOperationScreenState();
+  State<LiveOrdersScreen> createState() => _LiveOrdersScreenState();
 }
 
-class _KitchenOperationScreenState
-    extends State<KitchenOperationScreen> {
+class _LiveOrdersScreenState extends State<LiveOrdersScreen> {
 
   int selectedTopTab = 1;
 
@@ -28,7 +29,6 @@ class _KitchenOperationScreenState
       backgroundColor: const Color(0xffF7F7F7),
 
       appBar: AppBar(
-
         backgroundColor: Colors.white,
         elevation: 0,
 
@@ -45,18 +45,14 @@ class _KitchenOperationScreenState
         actions: [
 
           Container(
-
             margin: const EdgeInsets.only(right: 16),
-
             padding: const EdgeInsets.symmetric(
               horizontal: 12,
               vertical: 7,
             ),
 
             decoration: BoxDecoration(
-
               borderRadius: BorderRadius.circular(20),
-
               border: Border.all(
                 color: Colors.grey.shade300,
               ),
@@ -64,7 +60,6 @@ class _KitchenOperationScreenState
 
             child: Row(
               children: [
-
                 const Icon(
                   Icons.calendar_today,
                   size: 14,
@@ -75,7 +70,6 @@ class _KitchenOperationScreenState
 
                 Text(
                   "22-02-2023",
-
                   style: TextStyle(
                     fontSize: 11,
                     color: Colors.grey.shade700,
@@ -87,92 +81,63 @@ class _KitchenOperationScreenState
         ],
       ),
 
-      bottomNavigationBar: BottomNavigationBar(
-
-        currentIndex: 3,
-
-        type: BottomNavigationBarType.fixed,
-
-        selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.grey,
-
-        items: const [
-
-          BottomNavigationBarItem(
-            icon: Icon(Icons.dashboard_outlined),
-            label: "Dashboard",
-          ),
-
-          BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart_outlined),
-            label: "Take Orders",
-          ),
-
-          BottomNavigationBarItem(
-            icon: Icon(Icons.restaurant_menu),
-            label: "Prepare Order",
-          ),
-
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_work_outlined),
-            label: "Kitchen Operation",
-          ),
-        ],
-      ),
+      bottomNavigationBar: const CustomBottomNavigationBar(index: 3),
 
       body: SingleChildScrollView(
 
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-
           children: [
-
             const SizedBox(height: 10),
-
-            /// ================= TOP TABS =================
-
             SizedBox(
               height: 38,
-
               child: ListView.builder(
-
                 scrollDirection: Axis.horizontal,
-
                 padding: const EdgeInsets.symmetric(horizontal: 14),
-
                 itemCount: topTabs.length,
-
                 itemBuilder: (context, index) {
-
                   bool isSelected = selectedTopTab == index;
-
                   return GestureDetector(
-
                     onTap: () {
-
                       setState(() {
                         selectedTopTab = index;
                       });
+                      if(index == 0){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const ScheduleScreen(),
+                          ),
+                        );
+                      }
+                      else if(index == 1){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const LiveOrdersScreen(),
+                          ),
+                        );
+                      }
+                      else if(index == 2){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const ShelfLifeScreen(),
+                          ),
+                        );
+                      }
                     },
-
                     child: Container(
-
                       margin: const EdgeInsets.only(right: 10),
-
                       padding: const EdgeInsets.symmetric(
                         horizontal: 16,
                       ),
-
                       alignment: Alignment.center,
-
                       decoration: BoxDecoration(
-
                         color: isSelected
                             ? const Color(0xff1B1533)
                             : Colors.white,
-
                         borderRadius: BorderRadius.circular(22),
-
                         border: Border.all(
                           color: isSelected
                               ? const Color(0xff1B1533)
@@ -181,15 +146,10 @@ class _KitchenOperationScreenState
                       ),
 
                       child: Text(
-
                         topTabs[index],
-
                         style: TextStyle(
-
                           fontSize: 11,
-
                           fontWeight: FontWeight.w500,
-
                           color: isSelected
                               ? Colors.white
                               : Colors.black,
@@ -204,18 +164,13 @@ class _KitchenOperationScreenState
             const SizedBox(height: 22),
 
             Padding(
-
               padding: const EdgeInsets.symmetric(horizontal: 14),
-
               child: Row(
                 children: [
-
                   Column(
                     children: [
-
                       const Text(
-                        "Runing Orders",
-
+                        "Running Orders",
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 14,
@@ -889,7 +844,7 @@ class _KitchenOperationScreenState
       ),
     );
   }
-  
+
   Widget cardText(String title, String value) {
 
     return Column(

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kitchen_operations/model/model_data.dart';
 import 'package:kitchen_operations/view/bottom_navigation_bar.dart';
+import 'package:kitchen_operations/view/live_orders_screen.dart';
+import 'package:kitchen_operations/view/shelf_life_screen.dart';
 
 class ScheduleScreen extends StatefulWidget {
   const ScheduleScreen({super.key});
@@ -128,7 +130,6 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
 
           const SizedBox(height: 10),
 
-          /// TOP OPTIONS
           SizedBox(
             height: 45,
 
@@ -147,6 +148,31 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                     setState(() {
                       selectedIndex = index;
                     });
+                    
+                    if(index == 1){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const LiveOrdersScreen(),
+                        ),
+                      );
+                    }
+                    else if(index == 2){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ShelfLifeScreen(),
+                        ),
+                      );
+                    }
+                    else if(index == 3){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ScheduleScreen(),
+                        ),
+                      );
+                    }
                   },
 
                   child: Container(

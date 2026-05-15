@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:kitchen_operations/view/live_orders_screen.dart' show LiveOrdersScreen;
 
-class ShelfLifePage extends StatefulWidget {
-  const ShelfLifePage({super.key});
+class ShelfLifeScreen extends StatefulWidget {
+  const ShelfLifeScreen({super.key});
 
   @override
-  State<ShelfLifePage> createState() => _ShelfLifePageState();
+  State<ShelfLifeScreen> createState() => _ShelfLifeScreenState();
 }
 
-class _ShelfLifePageState extends State<ShelfLifePage> {
+class _ShelfLifeScreenState extends State<ShelfLifeScreen> {
 
   String selectedOption = "Shelf Life Items";
 
@@ -135,10 +136,21 @@ class _ShelfLifePageState extends State<ShelfLifePage> {
 
               child: Row(
                 children: [
+                  GestureDetector(
+                    onTap: () {
 
-                  topButton(
-                    title: "Live Orders",
-                    selected: false,
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const LiveOrdersScreen(),
+                        ),
+                      );
+                    },
+
+                    child: topButton(
+                      title: "Live Orders",
+                      selected: false,
+                    ),
                   ),
 
                   const SizedBox(width: 10),

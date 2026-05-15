@@ -16,29 +16,27 @@ class CustomBottomNavigationBar extends StatelessWidget {
       currentIndex: index,
 
       type: BottomNavigationBarType.fixed,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.dashboard_outlined),
+            label: "Dashboard",
+          ),
 
-      items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_cart_outlined),
+            label: "Take Orders",
+          ),
 
-        BottomNavigationBarItem(
-          icon: Icon(Icons.dashboard),
-          label: 'Dashboard',
-        ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.restaurant_menu),
+            label: "Prepare Order",
+          ),
 
-        BottomNavigationBarItem(
-          icon: Icon(Icons.takeout_dining),
-          label: 'Take Orders',
-        ),
-
-        BottomNavigationBarItem(
-          icon: Icon(Icons.schedule),
-          label: 'Prepare Order',
-        ),
-
-        BottomNavigationBarItem(
-          icon: Icon(Icons.restaurant_menu),
-          label: 'Kitchen Operation',
-        ),
-      ],
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home_work_outlined),
+            label: "Kitchen Operation",
+          ),
+        ],
     );
   }
 }
