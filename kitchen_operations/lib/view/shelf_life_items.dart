@@ -9,10 +9,8 @@ class ShelfLifePage extends StatefulWidget {
 
 class _ShelfLifePageState extends State<ShelfLifePage> {
 
-  /// SELECTED DROPDOWN VALUE
   String selectedOption = "Shelf Life Items";
 
-  /// DUMMY DATA
   final List<Map<String, dynamic>> shelfLifeList = [
     {
       "itemId": "IN01",
@@ -80,337 +78,343 @@ class _ShelfLifePageState extends State<ShelfLifePage> {
   Widget build(BuildContext context) {
 
     return Scaffold(
+
       backgroundColor: Colors.white,
 
-      /// APP BAR
       appBar: AppBar(
-        elevation: 0,
         backgroundColor: Colors.white,
+        elevation: 0,
         automaticallyImplyLeading: false,
 
-        title: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 6),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-
-              /// TITLE
-              const Text(
-                "Kitchen Operations",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.w700,
-                  fontSize: 22,
-                ),
-              ),
-
-              /// DATE
-              Row(
-                children: [
-
-                  const Icon(
-                    Icons.calendar_today_outlined,
-                    size: 18,
-                    color: Colors.black54,
-                  ),
-
-                  const SizedBox(width: 8),
-
-                  Text(
-                    "22-02-2023",
-                    style: TextStyle(
-                      color: Colors.grey.shade700,
-                      fontSize: 14,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
-
-      /// BODY
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
 
-            /// TOP BUTTONS
+            const Text(
+              "Kitchen Operations",
+
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+
             Row(
               children: [
 
-                /// LIVE ORDERS BUTTON
-                buildTopButton(
-                  title: "Live Orders",
-                  isSelected: false,
+                const Icon(
+                  Icons.calendar_today_outlined,
+                  size: 16,
+                  color: Colors.black54,
                 ),
 
-                const SizedBox(width: 12),
+                const SizedBox(width: 6),
 
-                /// DROPDOWN BUTTON
-                Container(
-                  height: 42,
-                  padding: const EdgeInsets.symmetric(horizontal: 14),
-                  decoration: BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.circular(12),
+                Text(
+                  "22-02-2023",
+
+                  style: TextStyle(
+                    color: Colors.grey.shade700,
+                    fontSize: 12,
                   ),
-
-                  child: DropdownButtonHideUnderline(
-                    child: DropdownButton<String>(
-
-                      value: selectedOption,
-
-                      icon: const Icon(
-                        Icons.keyboard_arrow_down,
-                        color: Colors.white,
-                      ),
-
-                      dropdownColor: Colors.white,
-
-                      borderRadius: BorderRadius.circular(12),
-
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 14,
-                      ),
-
-                      items: [
-                        "Shelf Life Items",
-                        "Prepared Items",
-                        "Expired Items",
-                        "Inventory Items",
-                      ].map((item) {
-
-                        return DropdownMenuItem(
-                          value: item,
-
-                          child: Text(
-                            item,
-                            style: const TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        );
-                      }).toList(),
-
-                      onChanged: (value) {
-                        setState(() {
-                          selectedOption = value!;
-                        });
-                      },
-
-                      selectedItemBuilder: (context) {
-
-                        return [
-                          "Shelf Life Items",
-                          "Prepared Items",
-                          "Expired Items",
-                          "Inventory Items",
-                        ].map((item) {
-
-                          return Row(
-                            children: [
-
-                              Text(
-                                item,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ],
-                          );
-                        }).toList();
-                      },
-                    ),
-                  ),
-                ),
-
-                const SizedBox(width: 12),
-
-                /// PREPARED BUTTON
-                buildTopButton(
-                  title: "Prepared",
-                  isSelected: false,
                 ),
               ],
             ),
+          ],
+        ),
+      ),
 
-            const SizedBox(height: 24),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
 
-            /// TABLE CONTAINER
-            Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Colors.grey.shade300,
+        child: Column(
+          children: [
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+
+              child: Row(
+                children: [
+
+                  topButton(
+                    title: "Live Orders",
+                    selected: false,
                   ),
-                ),
 
-                child: Column(
-                  children: [
+                  const SizedBox(width: 10),
 
-                    /// TABLE HEADER
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 16,
-                      ),
+                  Container(
+                    height: 42,
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
 
-                      decoration: BoxDecoration(
-                        border: Border(
-                          bottom: BorderSide(
-                            color: Colors.grey.shade300,
-                          ),
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButton<String>(
+
+                        value: selectedOption,
+
+                        dropdownColor: Colors.white,
+
+                        icon: const Icon(
+                          Icons.keyboard_arrow_down,
+                          color: Colors.white,
                         ),
+
+                        style: const TextStyle(
+                          color: Colors.black,
+                        ),
+
+                        items: [
+                          "Shelf Life Items",
+                          "Prepared Items",
+                          "Expired Items",
+                        ].map((item) {
+
+                          return DropdownMenuItem(
+                            value: item,
+
+                            child: Text(item),
+                          );
+                        }).toList(),
+
+                        onChanged: (value) {
+
+                          setState(() {
+                            selectedOption = value!;
+                          });
+                        },
+
+                        selectedItemBuilder: (context) {
+
+                          return [
+                            "Shelf Life Items",
+                            "Prepared Items",
+                            "Expired Items",
+                          ].map((item) {
+
+                            return Center(
+                              child: Text(
+                                item,
+
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            );
+                          }).toList();
+                        },
                       ),
+                    ),
+                  ),
 
-                      child: Row(
-                        children: [
+                  const SizedBox(width: 10),
 
-                          tableHeader("Item ID", 1),
+                  topButton(
+                    title: "Prepared",
+                    selected: false,
+                  ),
+                ],
+              ),
+            ),
 
-                          tableHeader("Item Name", 1.3),
+            const SizedBox(height: 20),
 
-                          tableHeader("Item Type", 1.3),
+            Expanded(
+              child: Scrollbar(
+                thumbVisibility: true,
 
-                          tableHeader("Preservation Method", 2),
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
 
-                          tableHeader("Storage Location", 1.5),
+                  child: Container(
+                    width: 1180,
 
-                          tableHeader("Total Available\nQuantity", 1.6),
-
-                          tableHeader("Days Left\nTo Shelf Life", 1.6),
-
-                          tableHeader("Remaining", 1),
-
-                          tableHeader("Action", 2.5),
-                        ],
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.grey.shade300,
                       ),
                     ),
 
-                    /// TABLE DATA
-                    Expanded(
-                      child: ListView.builder(
-                        itemCount: shelfLifeList.length,
+                    child: Column(
+                      children: [
 
-                        itemBuilder: (context, index) {
+                        /// HEADER
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 14,
+                          ),
 
-                          final item = shelfLifeList[index];
-
-                          return Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 12,
-                              vertical: 14,
-                            ),
-
-                            decoration: BoxDecoration(
-                              border: Border(
-                                bottom: BorderSide(
-                                  color: Colors.grey.shade200,
-                                ),
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                color: Colors.grey.shade300,
                               ),
                             ),
+                          ),
 
-                            child: Row(
-                              children: [
+                          child: Row(
+                            children: [
 
-                                tableCell(item["itemId"], 1),
+                              tableHeader("Item ID", 80),
 
-                                tableCell(item["itemName"], 1.3),
+                              tableHeader("Item Name", 120),
 
-                                tableCell(item["itemType"], 1.3),
+                              tableHeader("Item Type", 120),
 
-                                tableCell(item["method"], 2),
+                              tableHeader("Preservation", 150),
 
-                                tableCell(item["location"], 1.5),
+                              tableHeader("Location", 120),
 
-                                tableCell(item["quantity"], 1.6),
+                              tableHeader("Quantity", 100),
 
-                                /// RED DAYS TEXT
-                                Expanded(
-                                  flex: 16,
-                                  child: Text(
-                                    item["days"],
-                                    style: const TextStyle(
-                                      color: Colors.red,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 13,
+                              tableHeader("Shelf Life", 100),
+
+                              tableHeader("Remaining", 100),
+
+                              tableHeader("Action", 250),
+                            ],
+                          ),
+                        ),
+
+                        Expanded(
+                          child: ListView.builder(
+                            itemCount: shelfLifeList.length,
+
+                            itemBuilder: (context, index) {
+
+                              final item = shelfLifeList[index];
+
+                              return Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 12,
+                                  vertical: 14,
+                                ),
+
+                                decoration: BoxDecoration(
+                                  border: Border(
+                                    bottom: BorderSide(
+                                      color: Colors.grey.shade200,
                                     ),
                                   ),
                                 ),
 
-                                tableCell(item["remaining"], 1),
+                                child: Row(
+                                  children: [
 
-                                /// ACTION BUTTONS
-                                Expanded(
-                                  flex: 25,
-                                  child: Row(
-                                    children: [
+                                    tableCell(item["itemId"], 80),
 
-                                      /// SET DISCOUNT BUTTON
-                                      Expanded(
-                                        child: Container(
-                                          height: 32,
-                                          alignment: Alignment.center,
+                                    tableCell(item["itemName"], 120),
 
-                                          decoration: BoxDecoration(
-                                            color: Colors.black,
-                                            borderRadius:
-                                            BorderRadius.circular(6),
-                                          ),
+                                    tableCell(item["itemType"], 120),
 
-                                          child: const Text(
-                                            "Set Discount Offer",
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 10,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
+                                    tableCell(item["method"], 150),
+
+                                    tableCell(item["location"], 120),
+
+                                    tableCell(item["quantity"], 100),
+
+                                    SizedBox(
+                                      width: 100,
+
+                                      child: Text(
+                                        item["days"],
+
+                                        style: const TextStyle(
+                                          color: Colors.red,
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 12,
                                         ),
                                       ),
+                                    ),
 
-                                      const SizedBox(width: 8),
+                                    tableCell(item["remaining"], 100),
 
-                                      /// REMOVE BUTTON
-                                      Expanded(
-                                        child: Container(
-                                          height: 32,
-                                          alignment: Alignment.center,
+                                    SizedBox(
+                                      width: 250,
 
-                                          decoration: BoxDecoration(
-                                            border: Border.all(
-                                              color: Colors.black,
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                            child: Container(
+                                              height: 32,
+
+                                              alignment: Alignment.center,
+
+                                              decoration: BoxDecoration(
+                                                color: Colors.black,
+                                                borderRadius:
+                                                BorderRadius.circular(6),
+                                              ),
+
+                                              child: const Text(
+                                                "Discount",
+
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 10,
+                                                ),
+                                              ),
                                             ),
-
-                                            borderRadius:
-                                            BorderRadius.circular(6),
                                           ),
 
-                                          child: const Text(
-                                            "Remove From Wishlist",
-                                            style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 10,
-                                              fontWeight: FontWeight.w500,
+                                          const SizedBox(width: 8),
+
+                                          Expanded(
+                                            flex: 2,
+
+                                            child: Container(
+                                              height: 32,
+
+                                              alignment: Alignment.center,
+
+                                              decoration: BoxDecoration(
+                                                border: Border.all(
+                                                  color: Colors.black,
+                                                ),
+
+                                                borderRadius:
+                                                BorderRadius.circular(6),
+                                              ),
+
+                                              child: const Padding(
+                                                padding:
+                                                EdgeInsets.symmetric(
+                                                  horizontal: 4,
+                                                ),
+
+                                                child: Text(
+                                                  "Remove Wishlist",
+
+                                                  maxLines: 1,
+
+                                                  overflow:
+                                                  TextOverflow.ellipsis,
+
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 9,
+                                                  ),
+                                                ),
+                                              ),
                                             ),
                                           ),
-                                        ),
+                                        ],
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
-                          );
-                        },
-                      ),
+                              );
+                            },
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
               ),
             ),
@@ -418,9 +422,9 @@ class _ShelfLifePageState extends State<ShelfLifePage> {
         ),
       ),
 
-      /// BOTTOM NAVIGATION
       bottomNavigationBar: Container(
         height: 75,
+
         decoration: BoxDecoration(
           color: Colors.white,
 
@@ -437,27 +441,27 @@ class _ShelfLifePageState extends State<ShelfLifePage> {
           children: [
 
             bottomItem(
-              icon: Icons.grid_view_rounded,
-              title: "Dashboard",
-              selected: false,
+              Icons.grid_view_rounded,
+              "Dashboard",
+              false,
             ),
 
             bottomItem(
-              icon: Icons.delivery_dining_outlined,
-              title: "Take Orders",
-              selected: false,
+              Icons.delivery_dining_outlined,
+              "Take Orders",
+              false,
             ),
 
             bottomItem(
-              icon: Icons.restaurant_menu_outlined,
-              title: "Prepare Order",
-              selected: false,
+              Icons.restaurant_menu_outlined,
+              "Prepare Order",
+              false,
             ),
 
             bottomItem(
-              icon: Icons.soup_kitchen_outlined,
-              title: "Kitchen Operation",
-              selected: true,
+              Icons.soup_kitchen_outlined,
+              "Kitchen Operation",
+              true,
             ),
           ],
         ),
@@ -465,10 +469,9 @@ class _ShelfLifePageState extends State<ShelfLifePage> {
     );
   }
 
-  /// TOP BUTTON
-  Widget buildTopButton({
+  Widget topButton({
     required String title,
-    required bool isSelected,
+    required bool selected,
   }) {
 
     return Container(
@@ -478,7 +481,7 @@ class _ShelfLifePageState extends State<ShelfLifePage> {
       alignment: Alignment.center,
 
       decoration: BoxDecoration(
-        color: isSelected ? Colors.black : Colors.white,
+        color: selected ? Colors.black : Colors.white,
 
         borderRadius: BorderRadius.circular(12),
 
@@ -491,18 +494,17 @@ class _ShelfLifePageState extends State<ShelfLifePage> {
         title,
 
         style: TextStyle(
-          color: isSelected ? Colors.white : Colors.black,
+          color: selected ? Colors.white : Colors.black,
           fontWeight: FontWeight.w500,
         ),
       ),
     );
   }
 
-  /// TABLE HEADER
-  Widget tableHeader(String title, double flexValue) {
+  Widget tableHeader(String title, double width) {
 
-    return Expanded(
-      flex: (flexValue * 10).toInt(),
+    return SizedBox(
+      width: width,
 
       child: Text(
         title,
@@ -510,38 +512,37 @@ class _ShelfLifePageState extends State<ShelfLifePage> {
         style: const TextStyle(
           fontSize: 12,
           fontWeight: FontWeight.w600,
-          color: Colors.black87,
         ),
       ),
     );
   }
 
-  /// TABLE CELL
-  Widget tableCell(String value, double flexValue) {
+  Widget tableCell(String value, double width) {
 
-    return Expanded(
-      flex: (flexValue * 10).toInt(),
+    return SizedBox(
+      width: width,
 
       child: Text(
         value,
 
+        overflow: TextOverflow.ellipsis,
+
         style: const TextStyle(
           fontSize: 12,
-          color: Colors.black87,
         ),
       ),
     );
   }
 
-  /// BOTTOM NAVIGATION ITEM
-  Widget bottomItem({
-    required IconData icon,
-    required String title,
-    required bool selected,
-  }) {
+  Widget bottomItem(
+      IconData icon,
+      String title,
+      bool selected,
+      ) {
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
+
       children: [
 
         Icon(
